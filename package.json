@@ -1,0 +1,17 @@
+{
+  "name": "com.absence.zonesystem",
+  "version": "1.0.1",
+  "displayName": "absent-zones",
+  "description": "a simple zone system for Unity.",
+  "unity": "2022.3",
+  "unityRelease": "13f1",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "keywords": [],
+  "author": {
+    "name": "absencee_",
+    "email": "",
+    "url": "https://github.com/b1lodHand/"
+  }
+}
