@@ -25,7 +25,7 @@ using UnityEngine;
 namespace com.absence.zonesystem.editor.imported
 {
     [CustomPropertyDrawer(typeof(ReadonlyAttribute))]
-    public class ReadonlyPropertyDrawer : PropertyDrawer
+    internal class ReadonlyPropertyDrawer : PropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
