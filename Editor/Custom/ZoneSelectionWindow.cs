@@ -12,7 +12,7 @@ namespace com.absence.zonesystem.editor
 
         public static void Initiate()
         {
-            ZoneTypeCache.Refresh();
+            ZoneTypeCache.Refresh(false);
             GenerateGridContent();
             ClampSelectionIndex();
 

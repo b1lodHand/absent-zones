@@ -3,6 +3,7 @@ using UnityEngine;
 namespace com.absence.zonesystem
 {
     [RequireComponent(typeof(AudioSource))]
+    [AddComponentMenu("absencee_/absent-zones/Built-in/Audio Zone")]
     public class AudioZone : Zone
     {
         [SerializeField] private AudioSource m_source;

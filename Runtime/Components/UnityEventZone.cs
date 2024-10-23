@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 namespace com.absence.zonesystem
 {
+    [AddComponentMenu("absencee_/absent-zones/Built-in/UnityEvent Zone")]
     public class UnityEventZone : Zone
     {
         [SerializeField] private UnityEvent m_onEnterUnityEvent;

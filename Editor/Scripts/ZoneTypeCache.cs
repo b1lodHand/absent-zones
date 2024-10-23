@@ -8,6 +8,8 @@ namespace com.absence.zonesystem.editor
     [InitializeOnLoad]
     public static class ZoneTypeCache
     {
+        public const bool DEBUG_MODE = false;
+
         static List<Type> s_foundZoneTypes;
 
         public static int FoundTypeCount => s_foundZoneTypes.Count;
@@ -16,18 +18,14 @@ namespace com.absence.zonesystem.editor
 
         static ZoneTypeCache()
         {
-            Refresh();
+            Refresh(DEBUG_MODE);
         }
 
-        [MenuItem("absencee_/absent-zones/Refresh Type Cache")]
-        static void Refresh_MenuItem()
-        {
-            Refresh();
-        }
-
-        public static void Refresh()
+        public static void Refresh(bool debugMode)
         {
             s_foundZoneTypes = TypeCache.GetTypesDerivedFrom<Zone>().ToList();
+
+            if (debugMode) EditorJobsHelper.PrintTypeCache();
         }
     }
 }
