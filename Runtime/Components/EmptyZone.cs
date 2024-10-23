@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace com.absence.zonesystem
 {
-    public class Zone : BaseZone
+    public class EmptyZone : Zone
     {
         protected override void OnEnter_Internal(GameObject enteredOne)
         {

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace com.absence.zonesystem
 {
-    public class UnityEventZone : BaseZone
+    public class UnityEventZone : Zone
     {
         [SerializeField] private UnityEvent m_onEnterUnityEvent;
         [SerializeField] private UnityEvent m_onExitUnityEvent;

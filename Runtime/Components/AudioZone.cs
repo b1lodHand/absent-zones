@@ -3,7 +3,7 @@ using UnityEngine;
 namespace com.absence.zonesystem
 {
     [RequireComponent(typeof(AudioSource))]
-    public class AudioZone : BaseZone
+    public class AudioZone : Zone
     {
         [SerializeField] private AudioSource m_source;
         [SerializeField] private bool m_playOnEnter = true;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace com.absence.zonesystem
 {
     [RequireComponent(typeof(Collider))]
-    public abstract class BaseZone : MonoBehaviour
+    public abstract class Zone : MonoBehaviour
     {
         [System.Serializable]
         protected class ZoneGizmoData

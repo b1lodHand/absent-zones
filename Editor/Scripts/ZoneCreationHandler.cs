@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,28 +7,40 @@ namespace com.absence.zonesystem.editor
 {
     public static class ZoneCreationHandler
     {
-        [MenuItem("GameObject/absencee_/Zone/Empty Zone")]
+
+        [MenuItem("GameObject/absencee_/absent-zones/Empty Zone", priority = 0)]
         static void CreateZone_Default()
         {
-            CreateZone_Internal(typeof(Zone));
+            CreateZone_Internal(typeof(EmptyZone));
         }
 
-        [MenuItem("GameObject/absencee_/Zone/Unity Event Zone")]
+        [MenuItem("GameObject/absencee_/absent-zones/Unity Event Zone", priority = 1)]
         static void CreateZone_UnityEvent()
         {
             CreateZone_Internal(typeof(UnityEventZone));
         }
 
-        [MenuItem("GameObject/absencee_/Zone/Audio Zone")]
+        [MenuItem("GameObject/absencee_/absent-zones/Audio Zone", priority = 2)]
         static void CreateZone_Audio()
         {
             CreateZone_Internal(typeof(AudioZone));
         }
 
+        [MenuItem("GameObject/absencee_/absent-zones/More Zone Types...", priority = 3)]
+        static void InitiateZoneGrid()
+        {
+            ZoneSelectionWindow.Initiate();
+        }
+
+        public static void CreateZone(Type zoneType)
+        {
+            CreateZone_Internal(zoneType);
+        }
+
         static void CreateZone_Internal(Type zoneType)
         {
-            if (zoneType == null || !zoneType.BaseType.Equals(typeof(BaseZone)))
-                throw new Exception($"Target type is not derived from '{nameof(BaseZone)}' type.");
+            if (zoneType == null || !zoneType.BaseType.Equals(typeof(Zone)))
+                throw new Exception($"Target type is not derived from '{nameof(Zone)}' type.");
 
             // create the zone game object.
             GameObject zoneObj = new GameObject($"New {zoneType.Name}");
@@ -50,12 +63,27 @@ namespace com.absence.zonesystem.editor
             Undo.RegisterCreatedObjectUndo(zoneObj, "New Zone Created (In Editor)");
 
             // lets user select the collider type the zone will use.
-            bool colliderChoice = EditorUtility.DisplayDialog("Zone Collider", "What type of Collider will this Zone use?",
-                "Box Collider", "Sphere Collider");
+            int colliderChoice = EditorUtility.DisplayDialogComplex("Zone Collider", "What type of Collider will this Zone use?",
+                "Box Collider", "Sphere Collider", "Capsule Collider");
 
             // adds collider (needed by zone to function properly).
-            Collider collider = colliderChoice ? zoneObj.AddComponent<BoxCollider>() : zoneObj.AddComponent<SphereCollider>();
-            collider.isTrigger = true;
+
+            Collider collider;
+            switch (colliderChoice)
+            {
+                case 0: // Box Collider.
+                    collider = zoneObj.AddComponent<BoxCollider>();
+                    collider.isTrigger = true;
+                    break;
+                case 1: // Sphere Collider.
+                    collider = zoneObj.AddComponent<SphereCollider>();
+                    collider.isTrigger = true;
+                    break;
+                case 2: // Capsule Collider.
+                    collider = zoneObj.AddComponent<CapsuleCollider>();
+                    collider.isTrigger = true;
+                    break;
+            }
 
             // adds zone component.
             Component zoneComponent = zoneObj.AddComponent(zoneType);
