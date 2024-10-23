@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace com.absence.zonesystem
 {
+    /// <summary>
+    /// Base type to derive from if you want to create custom zone types.
+    /// </summary>
     [RequireComponent(typeof(Collider))]
     public abstract class Zone : MonoBehaviour
     {
@@ -19,7 +22,13 @@ namespace com.absence.zonesystem
         [SerializeField, Readonly] protected Collider m_collider;
         [SerializeField] protected ZoneGizmoData m_gizmoData = new();
 
+        /// <summary>
+        /// Action which will get invoked when any object enters the zone.
+        /// </summary>
         public event Action<GameObject> OnEnterEvent;
+        /// <summary>
+        /// Action which will get invoked when any object exits the zone.
+        /// </summary>
         public event Action<GameObject> OnExitEvent;
 
         protected void OnEnter(GameObject enteredOne)

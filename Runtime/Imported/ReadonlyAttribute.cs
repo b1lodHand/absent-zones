@@ -21,8 +21,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using UnityEngine;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("com.absence.zonesystem.editor")]
-
 namespace com.absence.zonesystem.imported
 {
     [AttributeUsage(AttributeTargets.Field)]

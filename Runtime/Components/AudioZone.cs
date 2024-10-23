@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace com.absence.zonesystem
 {
+    /// <summary>
+    /// A zone type which plays audio through an AudioSource when special events occur.
+    /// </summary>
     [RequireComponent(typeof(AudioSource))]
     [AddComponentMenu("absencee_/absent-zones/Built-in/Audio Zone")]
     public class AudioZone : Zone
