@@ -5,13 +5,19 @@ using UnityEngine;
 
 namespace com.absence.zonesystem.editor
 {
+    /// <summary>
+    /// The editor window that lets you select a zone type.
+    /// </summary>
     public class ZoneSelectionWindow : EditorWindow
     {
+        static bool s_targetFor2D = false;
         static int s_selectedZoneTypeIndex = 0;
         static GUIContent[] s_contents;
 
-        public static void Initiate()
+        public static void Initiate(bool targetFor2D)
         {
+            s_targetFor2D = targetFor2D;
+
             ZoneTypeCache.Refresh(false);
             GenerateGridContent();
             ClampSelectionIndex();
@@ -23,9 +29,10 @@ namespace com.absence.zonesystem.editor
 
         private void OnGUI()
         {
-            List<Type> foundTypes = ZoneTypeCache.FoundZoneTypes;
+            bool noTypes = s_targetFor2D ? 
+                ZoneTypeCache.NoZoneTypesFound2D : ZoneTypeCache.NoZoneTypesFound3D;
 
-            if (ZoneTypeCache.NoZoneTypesFound)
+            if (noTypes)
             {
                 GUILayout.Label("There are no types derived from Zone in this project.");
 
@@ -83,7 +90,11 @@ namespace com.absence.zonesystem.editor
 
         static void ApplySelection()
         {
-            ZoneCreationHandler.CreateZone(ZoneTypeCache.FoundZoneTypes[s_selectedZoneTypeIndex]);
+            List<Type> foundTypes = null;
+            if (s_targetFor2D) foundTypes = ZoneTypeCache.FoundZoneTypes2D;
+            else foundTypes = ZoneTypeCache.FoundZoneTypes3D;
+
+            ZoneCreationHandler.CreateZone(foundTypes[s_selectedZoneTypeIndex]);
         }
 
         static void ClampSelectionIndex()
@@ -96,7 +107,10 @@ namespace com.absence.zonesystem.editor
 
         static void GenerateGridContent()
         {
-            List<Type> foundTypes = ZoneTypeCache.FoundZoneTypes;
+            List<Type> foundTypes = null;
+            if (s_targetFor2D) foundTypes = ZoneTypeCache.FoundZoneTypes2D;
+            else foundTypes = ZoneTypeCache.FoundZoneTypes3D;
+
             int typeCount = foundTypes.Count;
 
             s_contents = new GUIContent[typeCount];

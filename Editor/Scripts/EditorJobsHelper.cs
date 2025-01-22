@@ -9,9 +9,23 @@ namespace com.absence.zonesystem.editor
         public static void PrintTypeCache()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<b>[ZONES] Types found in cache: </b>");
+            sb.Append("<b>[ZONES] Types found in cache: </b>\n");
 
-            ZoneTypeCache.FoundZoneTypes.ForEach(zoneType =>
+            sb.Append("<i>3D</i>");
+
+            ZoneTypeCache.FoundZoneTypes3D.ForEach(zoneType =>
+            {
+                sb.Append("\n\t");
+
+                sb.Append("<color=white>");
+                sb.Append("-> ");
+                sb.Append(zoneType.Name);
+                sb.Append("</color>");
+            });
+
+            sb.Append("\n<i>2D</i>");
+
+            ZoneTypeCache.FoundZoneTypes2D.ForEach(zoneType =>
             {
                 sb.Append("\n\t");
 

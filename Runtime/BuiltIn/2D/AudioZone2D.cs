@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace com.absence.zonesystem
+namespace com.absence.zonesystem.builtin
 {
     /// <summary>
-    /// A zone type which plays audio through an AudioSource when special events occur.
+    /// A zone type which plays audio through an AudioSource when special events occur (2D).
     /// </summary>
     [RequireComponent(typeof(AudioSource))]
-    [AddComponentMenu("absencee_/absent-zones/Built-in/Audio Zone")]
-    public class AudioZone : Zone
+    [AddComponentMenu("absencee_/absent-zones/Built-in/2D/Audio Zone")]
+    public class AudioZone2D : Zone2D
     {
         [SerializeField] private AudioSource m_source;
         [SerializeField] private bool m_playOnEnter = true;
@@ -29,5 +29,4 @@ namespace com.absence.zonesystem
             m_source = GetComponent<AudioSource>();
         }
     }
-
 }
